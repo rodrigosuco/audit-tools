@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :proposals
+  resources :standards
+  resources :proposals do
+    resources :items
+  end
   root "home#index"
   resources :companies
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

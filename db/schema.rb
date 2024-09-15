@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_15_024059) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_15_034723) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,20 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_15_024059) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "items", force: :cascade do |t|
+    t.bigint "standard_id", null: false
+    t.string "stage"
+    t.integer "year"
+    t.float "onsite_man_days"
+    t.float "off_site_man_days"
+    t.float "man_day_rate"
+    t.float "total_cost"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float "total_days"
+    t.index ["standard_id"], name: "index_items_on_standard_id"
+  end
+
   create_table "proposals", force: :cascade do |t|
     t.bigint "company_id", null: false
     t.string "title"
@@ -41,5 +55,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_15_024059) do
     t.index ["company_id"], name: "index_proposals_on_company_id"
   end
 
+  create_table "standards", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "items", "standards"
   add_foreign_key "proposals", "companies"
 end

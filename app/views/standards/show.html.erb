@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @standard %>
+
+<div>
+  <%= link_to "Edit this standard", edit_standard_path(@standard) %> |
+  <%= link_to "Back to standards", standards_path %>
+
+  <%= button_to "Destroy this standard", @standard, method: :delete %>
+</div>

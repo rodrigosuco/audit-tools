@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Standards" %>
+
+<h1>Standards</h1>
+
+<div id="standards">
+  <% @standards.each do |standard| %>
+    <%= render standard %>
+    <p>
+      <%= link_to "Show this standard", standard %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New standard", new_standard_path %>

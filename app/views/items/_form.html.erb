@@ -1,0 +1,57 @@
+<%= form_with(model: item) do |form| %>
+  <% if item.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+        <% item.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :standard_id, style: "display: block" %>
+    <%= form.text_field :standard_id %>
+  </div>
+
+  <div>
+    <%= form.label :stage, style: "display: block" %>
+    <%= form.text_field :stage %>
+  </div>
+
+  <div>
+    <%= form.label :year, style: "display: block" %>
+    <%= form.number_field :year %>
+  </div>
+
+  <div>
+    <%= form.label :onsite_man_days, style: "display: block" %>
+    <%= form.text_field :onsite_man_days %>
+  </div>
+
+  <div>
+    <%= form.label :off_site_man_days, style: "display: block" %>
+    <%= form.text_field :off_site_man_days %>
+  </div>
+
+  <div>
+    <%= form.label :total_days, style: "display: block" %>
+    <%= form.number_field :total_days, :disabled => true %>
+  </div>
+
+  <div>
+    <%= form.label :man_day_rate, style: "display: block" %>
+    <%= form.text_field :man_day_rate %>
+  </div>
+
+  <div>
+    <%= form.label :total_cost, style: "display: block" %>
+    <%= form.text_field :total_cost, :disabled => true %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

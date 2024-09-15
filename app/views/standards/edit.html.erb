@@ -1,0 +1,12 @@
+<% content_for :title, "Editing standard" %>
+
+<h1>Editing standard</h1>
+
+<%= render "form", standard: @standard %>
+
+<br>
+
+<div>
+  <%= link_to "Show this standard", @standard %> |
+  <%= link_to "Back to standards", standards_path %>
+</div>
