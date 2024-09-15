@@ -13,6 +13,7 @@ class ProposalsController < ApplicationController
   # GET /proposals/new
   def new
     @proposal = Proposal.new
+    @companies = Company.by_name
   end
 
   # GET /proposals/1/edit
