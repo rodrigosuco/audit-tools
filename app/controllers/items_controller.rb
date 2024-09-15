@@ -4,6 +4,7 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: %i[ show edit update destroy ]
   before_action :set_proposal
+  before_action :set_standards, only: %i[ new create edit update ]
   # GET /items or /items.json
   def index
     @items = Item.all
@@ -16,7 +17,6 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
-    @standards = Standard.by_name
   end
 
   # GET /items/1/edit
@@ -25,10 +25,10 @@ class ItemsController < ApplicationController
 
   # POST /items or /items.json
   def create
-    @proposal.items = Item.new(item_params)
+    @item = @proposal.items.build(item_params)
 
     respond_to do |format|
-      if @proposal.items.save
+      if @item.save
         format.html { redirect_to proposal_url(@proposal), notice: "Item was successfully created." }
         format.json { render :show, status: :created, location: @item }
       else
@@ -41,7 +41,7 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1 or /items/1.json
   def update
     respond_to do |format|
-      if @proposal.items.update(item_params)
+      if @item.update(item_params)
         format.html { redirect_to proposal_url(@proposal), notice: "Item was successfully updated." }
         format.json { render :show, status: :ok, location: @item }
       else
@@ -70,8 +70,12 @@ class ItemsController < ApplicationController
       @item = Item.find(params[:id])
     end
 
+    def set_standards
+      @standards = Standard.by_name
+    end
+
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:standard_id, :stage, :year, :onsite_man_days, :off_site_man_days, :man_day_rate, :total_cost)
+      params.require(:item).permit(:standard_id, :stage, :year, :onsite_man_days, :off_site_man_days, :man_day_rate, :total_cost, :proposal_id)
     end
 end
