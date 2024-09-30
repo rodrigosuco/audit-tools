@@ -5,10 +5,10 @@
 <h1>Items</h1>
 
 <div id="items">
-  <% @items.each do |item| %>
+  <% @proposal.items.each do |item| %>
     <%= render item %>
     <p>
-      <%= link_to "Show this item", item %>
+      <%= link_to "Show this item", proposal_item_path(@proposal, item) %>
     </p>
   <% end %>
 </div>
