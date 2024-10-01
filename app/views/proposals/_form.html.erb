@@ -1,8 +1,7 @@
-<%= form_with(model: proposal) do |form| %>
+<div class="container mx-auto px-4 py-8">
   <% if proposal.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(proposal.errors.count, "error") %> prohibited this proposal from being saved:</h2>
-
+    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
+      <h2 class="font-bold mb-2"><%= pluralize(proposal.errors.count, "error") %> prohibited this proposal from being saved:</h2>
       <ul>
         <% proposal.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,17 +10,26 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :company_id, style: "display: block" %>
-    <%= form.collection_select :company_id, @companies, :id, :sales_name, include_blank: true %>
-  </div>
+  <%= form_with(model: proposal, local: true) do |form| %>
+    <div class="space-y-6">
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
+      <div class="flex flex-wrap -mx-4">
+        <div class="w-full md:w-1/2 px-4 mb-4">
+          <%= form.label :company_id, "Company", class: "block text-gray-700 text-sm font-bold mb-2" %>
+          <%= form.collection_select :company_id, @companies, :id, :sales_name, { include_blank: true }, class: 'block w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200' %>
+        </div>
 
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+        <div class="w-full md:w-1/2 px-4 mb-4">
+          <%= form.label :title, "Title", class: "block text-gray-700 text-sm font-bold mb-2" %>
+          <%= form.text_field :title, class: 'block w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200' %>
+        </div>
+      </div>
+
+      <div class="flex space-x-4">
+        <%= link_to "Back to proposals", proposals_path, class: 'text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700' %>
+
+        <%= form.submit "Save Proposal", class: 'text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700' %>
+      </div>
+    </div>
+  <% end %>
+</div>

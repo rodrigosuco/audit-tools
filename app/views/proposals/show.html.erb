@@ -1,10 +1,28 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mx-auto px-4 py-8">
+  <% if notice.present? %>
+    <p class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert"><%= notice %></p>
+  <% end %>
 
-<%= render @proposal %>
+  <% content_for :title, "Proposal Details" %>
+  <div class="flex space-x-4 justify-end mb-6">
+    <%= link_to "Back to proposals", proposals_path, class: 'text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700' %>
 
-<div>
-  <%= link_to "Edit this proposal", edit_proposal_path(@proposal) %> |
-  <%= link_to "Back to proposals", proposals_path %>
+    <%= link_to "Edit this proposal", edit_proposal_path(@proposal), class: 'text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700' %>
 
-  <%= button_to "Destroy this proposal", @proposal, method: :delete %>
+    <%= button_to "Destroy this proposal", @proposal, method: :delete, data: { confirm: "Are you sure?" }, class: 'text-red-600 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700' %>
+  </div>
+
+  <div id="<%= dom_id @proposal %>" class="bg-white shadow-md rounded-lg p-6 mb-6">
+    <h2 class="text-xl font-bold mb-4">Proposal Details</h2>
+
+    <p class="text-sm text-gray-500 mb-2">
+      <strong>Company:</strong>
+      <%= Company.find_by(id: @proposal.company_id).sales_name %>
+    </p>
+
+    <p class="text-sm text-gray-500 mb-2">
+      <strong>Title:</strong>
+      <%= @proposal.title %>
+    </p>
+  </div>
 </div>

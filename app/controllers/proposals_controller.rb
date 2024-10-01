@@ -1,5 +1,6 @@
 class ProposalsController < ApplicationController
-  before_action :set_proposal, only: %i[ show edit update destroy ]
+  before_action :set_proposal, only: %i[show edit update destroy]
+  before_action :set_companies, only: %i[new edit create update] # Adicionando aqui
 
   # GET /proposals or /proposals.json
   def index
@@ -13,7 +14,6 @@ class ProposalsController < ApplicationController
   # GET /proposals/new
   def new
     @proposal = Proposal.new
-    @companies = Company.by_name
   end
 
   # GET /proposals/1/edit
@@ -59,13 +59,17 @@ class ProposalsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_proposal
-      @proposal = Proposal.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def proposal_params
-      params.require(:proposal).permit(:company_id, :title)
-    end
+  def set_proposal
+    @proposal = Proposal.find(params[:id])
+  end
+
+  def set_companies
+    @companies = Company.by_name
+  end
+
+  # Only allow a list of trusted parameters through.
+  def proposal_params
+    params.require(:proposal).permit(:company_id, :title)
+  end
 end

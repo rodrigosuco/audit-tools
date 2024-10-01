@@ -1,10 +1,39 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mx-auto px-4 py-8">
+  <% if notice.present? %>
+    <p class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert"><%= notice %></p>
+  <% end %>
 
-<%= render @company %>
+  <div class="flex space-x-4 justify-end mb-6">
+    <%= link_to "Back to companies", companies_path, class: 'text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700' %>
 
-<div>
-  <%= link_to "Edit this company", edit_company_path(@company) %> |
-  <%= link_to "Back to companies", companies_path %>
+    <%= link_to "Edit this company", edit_company_path(@company), class: 'text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700' %>
 
-  <%= button_to "Destroy this company", @company, method: :delete %>
+    <%= button_to "Destroy this company", @company, method: :delete, data: { confirm: "Are you sure?" }, class: 'text-red-900 bg-white border border-red-300 focus:outline-none hover:bg-red-100 focus:ring-4 focus:ring-red-100 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700' %>
+  </div>
+
+  <div id="<%= dom_id @company %>" class="bg-white shadow-md rounded-lg p-6 mb-6">
+    <h1 class="text-2xl font-bold mb-4"><%= @company.legal_name %></h1>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <p><strong>Legal name:</strong> <%= @company.legal_name %></p>
+        <p><strong>CNPJ:</strong> <%= @company.cnpj %></p>
+        <p><strong>Street:</strong> <%= @company.street %></p>
+        <p><strong>Number:</strong> <%= @company.number %></p>
+        <p><strong>Neighborhood:</strong> <%= @company.neighborhood %></p>
+        <p class="mt-4" ><strong>Contact name:</strong> <%= @company.contact_name %></p>
+        <p><strong>Contact email:</strong> <%= @company.contact_email %></p>
+      </div>
+      <div>
+        <p><strong>Sales name:</strong> <%= @company.sales_name %></p>
+        <p><strong>Compliment:</strong> <%= @company.compliment %></p>
+        <p><strong>City:</strong> <%= @company.city %></p>
+        <p><strong>State:</strong> <%= @company.state %></p>
+        <p><strong>Country:</strong> <%= @company.country %></p>
+      </div>
+    </div>
+
+    <p><strong>Contact phone:</strong> <%= @company.contact_phone %></p>
+    <p class="mt-4"><strong>Scope:</strong> <%= @company.scope %></p>
+  </div>
 </div>
