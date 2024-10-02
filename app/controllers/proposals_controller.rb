@@ -1,6 +1,6 @@
 class ProposalsController < ApplicationController
   before_action :set_proposal, only: %i[show edit update destroy]
-  before_action :set_companies, only: %i[new edit create update] # Adicionando aqui
+  before_action :set_companies, only: %i[new edit create update]
 
   # GET /proposals or /proposals.json
   def index

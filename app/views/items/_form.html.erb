@@ -1,9 +1,9 @@
-<%= form_with(model: [ @proposal, @item ]) do |form| %>
+<%= turbo_frame_tag 'item_form' do%>
+<%= form_with(model: [@proposal, item], local: true) do |form| %>
   <% if item.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
-
-      <ul>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+      <strong class="font-bold"><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</strong>
+      <ul class="list-disc pl-5 mt-2">
         <% item.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,48 +11,49 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :standard_id, style: "display: block" %>
-    <%= form.collection_select :standard_id, @standards, :id, :name, include_blank: true %>
+  <div class="mb-4">
+    <%= form.label :standard_id, "Standard", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.collection_select :standard_id, @standards, :id, :name, { include_blank: true }, class: 'block w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200' %>
+  </div>
 
+  <div class="mb-4">
+    <%= form.label :stage, "Stage", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.text_field :stage, class: 'block w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200' %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :year, "Year", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.number_field :year, class: 'block w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200' %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :onsite_man_days, "Onsite Man Days", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.text_field :onsite_man_days, class: 'block w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200' %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :off_site_man_days, "Off-site Man Days", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.text_field :off_site_man_days, class: 'block w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200' %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :total_days, "Total Days", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.number_field :total_days, class: 'block w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200', disabled: true %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :man_day_rate, "Man Day Rate", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.text_field :man_day_rate, class: 'block w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200' %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :total_cost, "Total Cost", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.text_field :total_cost, class: 'block w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200', disabled: true %>
   </div>
 
   <div>
-    <%= form.label :stage, style: "display: block" %>
-    <%= form.text_field :stage %>
+    <%= form.submit "Save Item", class: 'text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700' %>
+    <%= link_to "Cancel", proposal_path(@proposal), class: 'text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700' %>
   </div>
-
-  <div>
-    <%= form.label :year, style: "display: block" %>
-    <%= form.number_field :year %>
-  </div>
-
-  <div>
-    <%= form.label :onsite_man_days, style: "display: block" %>
-    <%= form.text_field :onsite_man_days %>
-  </div>
-
-  <div>
-    <%= form.label :off_site_man_days, style: "display: block" %>
-    <%= form.text_field :off_site_man_days %>
-  </div>
-
-  <div>
-    <%= form.label :total_days, style: "display: block" %>
-    <%= form.number_field :total_days, :disabled => true %>
-  </div>
-
-  <div>
-    <%= form.label :man_day_rate, style: "display: block" %>
-    <%= form.text_field :man_day_rate %>
-  </div>
-
-  <div>
-    <%= form.label :total_cost, style: "display: block" %>
-    <%= form.text_field :total_cost, :disabled => true %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+<% end %>
 <% end %>

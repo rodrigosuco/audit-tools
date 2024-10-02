@@ -1,16 +1,26 @@
-<p style="color: green"><%= notice %></p>
-
-<% content_for :title, "Standards" %>
-
-<h1>Standards</h1>
-
-<div id="standards">
-  <% @standards.each do |standard| %>
-    <%= render standard %>
-    <p>
-      <%= link_to "Show this standard", standard %>
-    </p>
+<div class="container mx-auto px-4 py-8">
+  <% if notice.present? %>
+    <p class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert"><%= notice %></p>
   <% end %>
-</div>
 
-<%= link_to "New standard", new_standard_path %>
+  <% content_for :title, "Standards" %>
+
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold">Standards List</h1>
+    <%= button_to "New standard", new_standard_path, method: :get, class: 'text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700' %>
+  </div>
+
+  <div class="space-y-4">
+    <% @standards.each do |standard| %>
+      <div class="bg-white shadow-md rounded-lg p-6 flex justify-between items-center">
+        <div>
+          <h2 class="text-lg font-semibold mb-2"><%= standard.name %></h2>
+        </div>
+
+        <div class="ml-6">
+          <%= button_to "Show this standard", standard, method: :get, class: 'text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

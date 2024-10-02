@@ -4,6 +4,13 @@ class Item < ApplicationRecord
   before_save :calc_total_days
   before_save :calc_total_price
 
+  validates :stage, presence: true
+  validates :year, presence: true, numericality: { only_integer: true }
+  validates :stage, presence: true
+  validates :onsite_man_days, presence: true, numericality: { only_float: true }
+  validates :off_site_man_days, presence: true, numericality: { only_float: true }
+  validates :man_day_rate, presence: true, numericality: { only_float: true }
+
   private
   def calc_total_days
     self.total_days = self.onsite_man_days + self.off_site_man_days

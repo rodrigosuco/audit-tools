@@ -6,23 +6,65 @@
   <% content_for :title, "Proposal Details" %>
   <div class="flex space-x-4 justify-end mb-6">
     <%= link_to "Back to proposals", proposals_path, class: 'text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700' %>
-
     <%= link_to "Edit this proposal", edit_proposal_path(@proposal), class: 'text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700' %>
-
     <%= button_to "Destroy this proposal", @proposal, method: :delete, data: { confirm: "Are you sure?" }, class: 'text-red-600 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700' %>
   </div>
 
   <div id="<%= dom_id @proposal %>" class="bg-white shadow-md rounded-lg p-6 mb-6">
     <h2 class="text-xl font-bold mb-4">Proposal Details</h2>
-
+    <p class="text-lg font-semibold mb-2">
+      <%= @proposal.title %>
+    </p>
     <p class="text-sm text-gray-500 mb-2">
       <strong>Company:</strong>
       <%= Company.find_by(id: @proposal.company_id).sales_name %>
     </p>
-
-    <p class="text-sm text-gray-500 mb-2">
-      <strong>Title:</strong>
-      <%= @proposal.title %>
-    </p>
   </div>
+
+  <%= turbo_frame_tag 'item_form' do %>
+    <% @proposal.items.each do |item| %>
+      <div id="<%= dom_id item %>" class="bg-white shadow-md rounded-lg p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">Item Details</h3>
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <p class="text-sm text-gray-700">
+            <strong class="font-medium">Standard:</strong>
+            <%= Standard.find_by(id: item.standard_id).name %>
+          </p>
+          <p class="text-sm text-gray-700">
+            <strong class="font-medium">Stage:</strong>
+            <%= item.stage %>
+          </p>
+          <p class="text-sm text-gray-700">
+            <strong class="font-medium">Year:</strong>
+            <%= item.year %>
+          </p>
+          <p class="text-sm text-gray-700">
+            <strong class="font-medium">Onsite man days:</strong>
+            <%= item.onsite_man_days %>
+          </p>
+          <p class="text-sm text-gray-700">
+            <strong class="font-medium">Off site man days:</strong>
+            <%= item.off_site_man_days %>
+          </p>
+          <p class="text-sm text-gray-700">
+            <strong class="font-medium">Total days:</strong>
+            <%= item.total_days %>
+          </p>
+          <p class="text-sm text-gray-700">
+            <strong class="font-medium">Man day rate:</strong>
+            <%= item.man_day_rate %>
+          </p>
+          <p class="text-sm text-gray-700">
+            <strong class="font-medium">Total cost:</strong>
+            <%= item.total_cost %>
+          </p>
+        </div>
+        <div class="flex justify-end space-x-4">
+          <%= link_to "Edit", edit_proposal_item_path(@proposal, item), class: "bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" %>
+          <%= button_to "Destroy", proposal_item_path(@proposal, item), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class: "bg-white hover:bg-gray-100 text-red-600 font-semibold py-2 px-4 border border-gray-400 rounded shadow" %>
+        </div>
+      </div>
+    <% end %>
+    <%= link_to "Add Items", new_proposal_item_path(@proposal), data: { turbo_frame: 'item_form' }, class: 'text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700' %>
+  <% end %>
 </div>

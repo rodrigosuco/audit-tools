@@ -14,13 +14,12 @@
     <% @proposals.each do |proposal| %>
       <div class="bg-white shadow-md rounded-lg p-6 flex justify-between items-center">
         <div class="flex flex-col">
+          <p class="text-lg font-semibold mb-2">
+            <%= proposal.title %>
+          </p>
           <p class="text-sm text-gray-500 mb-1">
             <strong>Company:</strong>
             <%= Company.find_by(id: proposal.company_id).sales_name %>
-          </p>
-          <p class="text-sm text-gray-500 mb-1">
-            <strong>Title:</strong>
-            <%= proposal.title %>
           </p>
         </div>
 
