@@ -18,11 +18,11 @@
   <%= javascript_importmap_tags %>
 </head>
 
-<body class="h-screen overflow-hidden"> <!-- Evita o overflow do corpo -->
+<body class="h-screen overflow-hidden">
 <%= render 'shared/topnav' %>
-<div class="flex h-[calc(100vh-80px)]"> <!-- Altura total ajustada -->
+<div class="flex h-[calc(100vh-80px)]">
   <%= render 'shared/sidenav' if current_user %>
-  <main class="bg-slate-100 w-5/6 p-4 flex-grow overflow-auto"> <!-- Permite scroll no main -->
+  <main class="bg-slate-100 w-5/6 p-4 flex-grow overflow-auto">
     <%= yield %>
   </main>
 </div>

@@ -2,6 +2,7 @@
 
 # class ItemsController
 class ItemsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_proposal
   before_action :set_item, only: %i[show edit update destroy]
   before_action :set_standards, only: %i[new create edit update]

@@ -1,4 +1,5 @@
 class ProposalsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_proposal, only: %i[show edit update destroy]
   before_action :set_companies, only: %i[new edit create update]
 
