@@ -1,0 +1,36 @@
+<nav class="w-1/6 hidden md:flex flex-col text-center p-4 sticky top-20 h-[calc(100vh-80px)]">
+  <div class="bg-white shadow-md rounded-lg p-4 mb-6">
+    <div class="flex items-center">
+      <%= image_tag 'user_avatar.png', alt: "logo", class: 'w-10 h-10 rounded-full border-2 border-gray-200 mr-4' %>
+      <div class="text-left flex-1">
+        <p class="font-semibold text-sm text-gray-500">Welcome!</p>
+        <p class="text-gray-800 text-sm truncate">
+          <%= current_user.name %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex-grow">
+    <div class=" flex flex-col">
+      <%= link_to 'Home', root_path,
+                  class: "hover:bg-gray-300 focus:ring-1 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:hover:bg-gray-300 dark:focus:ring-gray-800 #{current_page?(root_path) ? 'ring-1 ring-gray-300 text-black' : 'text-gray-900 hover:text-black dark:text-gray-400 dark:hover:text-black'}" %>
+
+      <%= link_to 'Companies', companies_path,
+                  class: "hover:bg-gray-300 focus:ring-1 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:hover:bg-gray-300 dark:focus:ring-gray-800 #{current_page?(companies_path) ? 'ring-1 ring-gray-300 text-black' : 'text-gray-900 hover:text-black dark:text-gray-400 dark:hover:text-black'}" %>
+
+      <%= link_to 'Proposals', proposals_path,
+                  class: "hover:bg-gray-300 focus:ring-1 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:hover:bg-gray-300 dark:focus:ring-gray-800 #{current_page?(proposals_path) ? 'ring-1 ring-gray-300 text-black' : 'text-gray-900 hover:text-black dark:text-gray-400 dark:hover:text-black'}" %>
+
+      <%= link_to 'Standards', standards_path,
+                  class: "hover:bg-gray-300 focus:ring-1 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:hover:bg-gray-300 dark:focus:ring-gray-800 #{current_page?(standards_path) ? 'ring-1 ring-gray-300 text-black' : 'text-gray-900 hover:text-black dark:text-gray-400 dark:hover:text-black'}" %>
+
+      <%= link_to 'Users', users_path,
+                  class: "hover:bg-gray-300 focus:ring-1 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:hover:bg-gray-300 dark:focus:ring-gray-800 #{current_page?(users_path) ? 'ring-1 ring-gray-300 text-black' : 'text-gray-900 hover:text-black dark:text-gray-400 dark:hover:text-black'}" %>
+    </div>
+  </div>
+
+  <div class="mt-auto">
+    <%= button_to "Sign out", destroy_user_session_path, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class: 'text-gray-900 bg-red-500 focus:outline-none hover:bg-green-100 focus:ring-1 focus:ring-red-100 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:text-black dark:border-red-600 dark:hover:bg-red-400 dark:hover:border-red-600 dark:focus:ring-red-100' %>
+  </div>
+</nav>

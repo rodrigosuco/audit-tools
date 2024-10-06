@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :roles
-  resources :users
+  scope "/admin" do
+    resources :users
+  end
   resources :standards
   resources :proposals do
     resources :items

@@ -1,27 +1,49 @@
-<%= form_with(model: user, class: "contents") do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<div class="container mx-auto px-4 py-8">
+  <h2 class="text-2xl font-bold mb-6">Create User</h2>
 
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <%= form_with(model: user, local: true, class: "space-y-4") do |form| %>
+    <% if user.errors.any? %>
+      <div id="error_explanation" class="bg-red-100 border border-red-400 text-red-700 p-4 rounded-lg">
+        <h2 class="font-bold"><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+        <ul class="list-disc list-inside">
+          <% user.errors.full_messages.each do |error| %>
+            <li><%= error %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.label :name, class: "block font-semibold mb-1" %>
+      <%= form.text_field :name, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" %>
+    </div>
+
+    <div>
+      <%= form.label :role_id, class: "block font-semibold mb-1" %>
+      <%= form.collection_select :role_id, Role.all, :id, :name, { prompt: "Select a role" }, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" %>
+    </div>
+
+    <div>
+      <%= form.label :email, class: "block font-semibold mb-1" %>
+      <%= form.email_field :email, autofocus: true, autocomplete: "email", class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" %>
+    </div>
+
+    <div>
+      <%= form.label :password, class: "block font-semibold mb-1" %>
+      <% if @minimum_password_length %>
+        <em class="text-sm text-gray-500">(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %>
+      <%= form.password_field :password, autocomplete: "new-password", class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" %>
+    </div>
+
+    <div>
+      <%= form.label :password_confirmation, class: "block font-semibold mb-1" %>
+      <%= form.password_field :password_confirmation, autocomplete: "new-password", class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" %>
+    </div>
+
+    <div class="mt-6">
+      <%= link_to "Back to users", users_path, class: 'text-gray-900 bg-white focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:text-black dark:border-gray-600 dark:hover:bg-gray-100 dark:hover:border-gray-600 dark:focus:ring-gray-100' %>
+      <%= form.submit "Create User", class: 'text-gray-900 bg-green-500 focus:outline-none hover:bg-green-100 focus:ring-1 focus:ring-green-100 font-medium rounded-lg text-sm px-5 py-2.5 mb-2' %>
     </div>
   <% end %>
-
-  <div class="my-5">
-    <%= form.label :name %>
-    <%= form.text_field :name, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :role_id %>
-    <%= form.collection_select :role_id, @roles, :id, :name, { include_blank: true }, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-  </div>
-<% end %>
+</div>
