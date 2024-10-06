@@ -19,6 +19,10 @@
       <strong>Company:</strong>
       <%= Company.find_by(id: @proposal.company_id).sales_name %>
     </p>
+    <p class="text-sm text-gray-500 mb-2">
+      <strong>Total cost:</strong>
+      <%= @proposal.total_cost %>
+    </p>
   </div>
 
   <%= turbo_frame_tag 'item_form' do %>
