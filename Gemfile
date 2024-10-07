@@ -61,3 +61,5 @@ gem "tailwindcss-rails", "~> 2.7"
 gem "devise"
 
 gem "cancancan"
+
+gem "dotenv"
