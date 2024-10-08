@@ -63,3 +63,7 @@ gem "devise"
 gem "cancancan"
 
 gem "dotenv"
+
+gem "wicked_pdf"
+
+gem "wkhtmltopdf-binary"

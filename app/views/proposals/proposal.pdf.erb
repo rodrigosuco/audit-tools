@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Proposal PDF</title>
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 12px; }
+    h1 { font-size: 24px; text-align: center; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid black; padding: 10px; text-align: left; }
+  </style>
+</head>
+<body>
+  <h1>Proposal: <%= @proposal.title %></h1>
+  <p><strong>Company:</strong> <%= @proposal.company.sales_name %></p>
+  <p><strong>Total Cost:</strong> <%= @proposal.total_cost %></p>
+
+  <h2>Items</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Standard</th>
+        <th>Stage</th>
+        <th>Year</th>
+        <th>Onsite Man Days</th>
+        <th>Offsite Man Days</th>
+        <th>Total Days</th>
+        <th>Man Day Rate</th>
+        <th>Total Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @proposal.items.each do |item| %>
+        <tr>
+          <td><%= item.standard.name %></td>
+          <td><%= item.stage %></td>
+          <td><%= item.year %></td>
+          <td><%= item.onsite_man_days %></td>
+          <td><%= item.off_site_man_days %></td>
+          <td><%= item.total_days %></td>
+          <td><%= item.man_day_rate %></td>
+          <td><%= item.total_cost %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</body>
+</html>

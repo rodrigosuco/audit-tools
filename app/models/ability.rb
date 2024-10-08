@@ -16,6 +16,7 @@ class Ability
     elsif user.role.name == "common"
       can :manage, Proposal
       can :manage, Company
+      can :read, Standard
     else
       can :read, :all
     end

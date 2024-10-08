@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   resources :standards
   resources :proposals do
     resources :items
+    member do
+      get :export
+    end
   end
   root "home#index"
   resources :companies

@@ -12,6 +12,14 @@ class ProposalsController < ApplicationController
   def show
   end
 
+  def export
+    respond_to do |format|
+      format.pdf do
+        render pdf: "proposal", template: "proposals/proposal", layout: "pdf"
+      end
+    end
+  end
+
   # GET /proposals/new
   def new
     @proposal = Proposal.new
