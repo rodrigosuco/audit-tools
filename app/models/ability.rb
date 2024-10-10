@@ -13,10 +13,12 @@ class Ability
       can :manage, Proposal
       can :manage, Company
       can :manage, Standard
+      can :manage, Item
     elsif user.role.name == "common"
       can :manage, Proposal
       can :manage, Company
       can :read, Standard
+      can :manage, Item
     else
       can :read, :all
     end

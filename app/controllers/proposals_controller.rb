@@ -13,11 +13,7 @@ class ProposalsController < ApplicationController
   end
 
   def export
-    respond_to do |format|
-      format.pdf do
-        render pdf: "proposal", template: "proposals/proposal", layout: "pdf"
-      end
-    end
+    export_response
   end
 
   # GET /proposals/new
@@ -68,6 +64,10 @@ class ProposalsController < ApplicationController
   end
 
   private
+
+  def export_response
+    ::ExportProposalJob.perform_async(@proposal.as_json)
+  end
 
   def set_proposal
     @proposal = Proposal.find(params[:id])
