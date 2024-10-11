@@ -3,9 +3,9 @@ class ExportProposalJob
   sidekiq_options retry: false
   attr_reader :proposal, :file_path
 
-  def perform(proposal_data)
+  def perform(proposal_data, current_user)
     @proposal = Proposal.new(proposal_data)
-    pdf_content = ::PdfGeneratorService.new(proposal).generate_pdf
+    pdf_content = ::PdfGeneratorService.new(proposal, current_user).generate_pdf
 
     @file_path = Rails.root.join('public', 'pdfs', "#{proposal.title}.pdf")
 

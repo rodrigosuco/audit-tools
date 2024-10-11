@@ -14,6 +14,8 @@ class ProposalsController < ApplicationController
 
   def export
     export_response
+    redirect_to proposal_url(@proposal), notice: "The proposal export request was successful,
+                                                   the company contact will receive it via email."
   end
 
   # GET /proposals/new
@@ -66,7 +68,7 @@ class ProposalsController < ApplicationController
   private
 
   def export_response
-    ::ExportProposalJob.perform_async(@proposal.as_json)
+    ::ExportProposalJob.perform_async(@proposal.as_json, current_user.as_json)
   end
 
   def set_proposal

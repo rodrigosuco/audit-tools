@@ -1,8 +1,9 @@
 # app/services/pdf_generator_service.rb
 
 class PdfGeneratorService
-  def initialize(proposal)
+  def initialize(proposal, current_user)
     @proposal = proposal
+    @current_user = current_user
   end
 
   def generate_pdf
@@ -11,7 +12,7 @@ class PdfGeneratorService
       template: "proposals/proposal",
       layout: "pdf",
       encoding: "UTF-8",
-      assigns: { proposal: @proposal }
+      assigns: { proposal: @proposal, current_user: @current_user }
     )
   end
 end
