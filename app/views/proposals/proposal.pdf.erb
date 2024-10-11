@@ -64,7 +64,7 @@
   <div class="header">
     <%= image_tag 'Logo_Intertek.png' %>
     <p>Preparado por: <strong><%= @current_user['name'] %></strong></p>
-    <p>todo current user position</p>
+    <p><%= @current_user['position'] %></p>
     <p>Data: <%= Date.today.strftime('%d/%m/%Y') %></p>
   </div>
 
@@ -72,7 +72,7 @@
     <h1>PROPOSTA COMERCIAL - SERVIÇOS DE AUDITORIA DE CERTIFICAÇÃO</h1>
     <p class="highlight"><%= @proposal.company.legal_name.upcase %></p>
     <p><%= @proposal.company.street %>, <%= @proposal.company.number %>, <%= @proposal.company.neighborhood %>,
-      <%= @proposal.company.city %>, <%= @proposal.company.state %>, todo zipcode</p>
+      <%= @proposal.company.city %>, <%= @proposal.company.state %>, <%= @proposal.company.zip %>/p>
     <p>Norma: <%= @proposal.items.first.standard.name.upcase %></p>
     <p>Prezado(a) <%= @proposal.company.contact_name %>,</p>
     <p>Agradecemos por seu interesse nos serviços da Intertek. Temos o prazer de apresentar a nossa proposta em resposta à sua solicitação de serviços na norma <%= @proposal.items.first.standard.name.upcase %>.</p>
@@ -174,7 +174,7 @@
       </tr>
       <tr>
         <td><strong>Cargo:</strong></td>
-        <td>todo contact position</td>
+        <td><%= @proposal.company.contact_position %></td>
       </tr>
       <tr>
         <td><strong>Empresa:</strong></td>
@@ -186,7 +186,7 @@
 
   <div class="footer">
     <p>Confidencial – Estritamente para as partes pretendidas.</p>
-    <p>Atenciosamente,<br><%= @current_user['name'] %><br>todo user position<br>Intertek do Brasil Inspeções Ltda.<br>todo current user phone<br><%= @current_user['email'] %></p>
+    <p>Atenciosamente,<br><%= @current_user['name'] %><br><%= @current_user['position'] %><br>Intertek do Brasil Inspeções Ltda.<br><%= @current_user['phone'] %><br><%= @current_user['email'] %></p>
     <p>Obrigado por considerar nossos serviços. Por favor, não hesite em nos contatar com quaisquer perguntas.</p>
   </div>
 </body>
