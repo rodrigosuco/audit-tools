@@ -19,7 +19,7 @@
     </p>
     <p class="text-sm text-gray-500 mb-2">
       <strong>Company:</strong>
-      <%= Company.find_by(id: @proposal.company_id).sales_name %>
+      <%= @proposal.company.sales_name %>
     </p>
     <p class="text-sm text-gray-500 mb-2">
       <strong>Total cost:</strong>
@@ -34,7 +34,7 @@
         <div class="grid grid-cols-2 gap-4 mb-4">
           <p class="text-sm text-gray-700">
             <strong class="font-medium">Standard:</strong>
-            <%= Standard.find_by(id: item.standard_id).name %>
+            <%= item.standard.name %>
           </p>
           <p class="text-sm text-gray-700">
             <strong class="font-medium">Stage:</strong>
