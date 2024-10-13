@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :items
     member do
       get :export
+      get :download
     end
   end
   root "home#index"

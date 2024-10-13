@@ -18,6 +18,20 @@ class ProposalsController < ApplicationController
                                                    the company contact will receive it via email."
   end
 
+  def download
+    pdf_thread = Thread.new do
+      PdfGeneratorService.new(@proposal, current_user).generate_download_pdf
+    end
+
+    pdf = pdf_thread.value
+
+    send_data pdf,
+              filename: "#{@proposal.title}.pdf",
+              type: 'application/pdf',
+              disposition: 'attachment'
+  end
+
+
   # GET /proposals/new
   def new
     @proposal = Proposal.new

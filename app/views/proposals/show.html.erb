@@ -39,6 +39,7 @@
       <div data-proposals-target="dropdownMenu" class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
         <div class="py-1" role="none">
           <%= link_to "Send to company", "#", data: { action: "proposals#showModal" }, class: 'block px-4 py-2 text-sm text-gray-700' %>
+          <%= link_to "Download", download_proposal_path(@proposal), class: 'block px-4 py-2 text-sm text-gray-700' %>
         </div>
       </div>
     </div>
@@ -50,9 +51,9 @@
     <div class="flex items-center justify-center min-h-screen p-4">
       <div class="bg-white rounded-lg shadow-lg transform transition-all sm:max-w-lg sm:w-full">
         <div class="px-6 py-5">
-          <h3 class="text-xl leading-6 font-semibold text-gray-900">Confirm Export?</h3>
+          <h3 class="text-xl leading-6 font-semibold text-gray-900">Confirm send to company?</h3>
           <div class="mt-4">
-            <p class="text-sm text-gray-500">This proposal will be sent to the companie's contact:</p>
+            <p class="text-sm text-gray-500">This proposal will be sent to the company contact:</p>
             <p class="text-sm text-gray-500"><%= @proposal.company.contact_name %></p>
           </div>
         </div>

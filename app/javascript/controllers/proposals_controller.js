@@ -5,7 +5,6 @@ export default class extends Controller {
 
     connect() {
         this.handleDocumentClick = this.handleDocumentClick.bind(this);
-        this.closeModalOnOutsideClick = this.closeModalOnOutsideClick.bind(this);
     }
 
     showModal(event) {

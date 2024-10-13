@@ -15,4 +15,13 @@ class PdfGeneratorService
       assigns: { proposal: @proposal, current_user: @current_user }
     )
   end
+  def generate_download_pdf
+    WickedPdf.new.pdf_from_string(
+      ApplicationController.render(
+        template: "proposals/proposal",
+        layout: "pdf",
+        assigns: { proposal: @proposal, current_user: @current_user }
+      )
+    )
+  end
 end
