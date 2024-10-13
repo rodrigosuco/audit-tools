@@ -1,4 +1,4 @@
-<div class="container mx-auto px-4 py-8">
+<div class="container mx-auto px-4 py-8" data-controller="proposals">
   <% if notice.present? %>
     <p class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert"><%= notice %></p>
   <% end %>
@@ -6,25 +6,64 @@
   <% content_for :title, "Proposal Details" %>
   <div class="flex space-x-4 justify-end mb-6">
     <%= link_to "Add Items", new_proposal_item_path(@proposal), data: { turbo_frame: 'item_form' }, class: 'text-gray-900 bg-green-500 focus:outline-none hover:bg-green-100 focus:ring-1 focus:ring-green-100 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:text-black dark:border-green-600 dark:hover:bg-green-400 dark:hover:border-green-600 dark:focus:ring-green-100' %>
-    <%= link_to "Export proposal", export_proposal_path(@proposal, format: :pdf), class: 'text-gray-900 bg-white focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:text-black dark:border-gray-600 dark:hover:bg-gray-100 dark:hover:border-gray-600 dark:focus:ring-gray-100' %>
     <%= link_to "Back to proposals", proposals_path, class: 'text-gray-900 bg-white focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:text-black dark:border-gray-600 dark:hover:bg-gray-100 dark:hover:border-gray-600 dark:focus:ring-gray-100' %>
     <%= link_to "Edit this proposal", edit_proposal_path(@proposal), class: 'text-gray-900 bg-white focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:text-black dark:border-gray-600 dark:hover:bg-gray-100 dark:hover:border-gray-600 dark:focus:ring-gray-100' %>
     <%= button_to "Destroy this proposal", @proposal, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class: 'text-gray-900 bg-red-500 focus:outline-none hover:bg-green-100 focus:ring-1 focus:ring-red-100 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:text-black dark:border-red-600 dark:hover:bg-red-400 dark:hover:border-red-600 dark:focus:ring-red-100' %>
   </div>
 
-  <div id="<%= dom_id @proposal %>" class="bg-white shadow-md rounded-lg p-6 mb-6">
-    <h2 class="text-xl font-bold mb-4">Proposal Details</h2>
-    <p class="text-lg font-semibold mb-2">
-      <%= @proposal.title %>
-    </p>
-    <p class="text-sm text-gray-500 mb-2">
-      <strong>Company:</strong>
-      <%= @proposal.company.sales_name %>
-    </p>
-    <p class="text-sm text-gray-500 mb-2">
-      <strong>Total cost:</strong>
-      <%= @proposal.total_cost %>
-    </p>
+  <div id="<%= dom_id @proposal %>" class="bg-white shadow-md rounded-lg p-6 mb-6 flex justify-between">
+    <div>
+      <h2 class="text-xl font-bold mb-4">Proposal Details</h2>
+      <p class="text-lg font-semibold mb-2">
+        <%= @proposal.title %>
+      </p>
+      <p class="text-sm text-gray-500 mb-2">
+        <strong>Company:</strong>
+        <%= @proposal.company.sales_name %>
+      </p>
+      <p class="text-sm text-gray-500 mb-2">
+        <strong>Total cost:</strong>
+        <%= @proposal.total_cost %>
+      </p>
+    </div>
+    <div class="relative inline-block text-left">
+      <div>
+        <button type="button" data-action="proposals#toggleDropdown" class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+          Export Options
+          <svg class="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      </div>
+
+      <div data-proposals-target="dropdownMenu" class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+        <div class="py-1" role="none">
+          <%= link_to "Send to company", "#", data: { action: "proposals#showModal" }, class: 'block px-4 py-2 text-sm text-gray-700' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div data-proposals-target="modal" class="fixed inset-0 overflow-y-auto hidden z-50">
+    <div class="fixed inset-0 bg-black bg-opacity-50" data-action="click->proposals#hideModal"></div>
+
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="bg-white rounded-lg shadow-lg transform transition-all sm:max-w-lg sm:w-full">
+        <div class="px-6 py-5">
+          <h3 class="text-xl leading-6 font-semibold text-gray-900">Confirm Export?</h3>
+          <div class="mt-4">
+            <p class="text-sm text-gray-500">This proposal will be sent to the companie's contact:</p>
+            <p class="text-sm text-gray-500"><%= @proposal.company.contact_name %></p>
+          </div>
+        </div>
+        <div class="px-6 py-4 sm:flex sm:flex-row-reverse">
+          <%= link_to "Send by Email", export_proposal_path(@proposal, format: :pdf), class: "w-full sm:w-auto inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:text-sm" %>
+          <button data-action="proposals#hideModal" type="button" class="mt-3 sm:mt-0 w-full sm:w-auto inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 sm:text-sm">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <%= turbo_frame_tag 'item_form' do %>

@@ -7,7 +7,7 @@ class ExportProposalJob
     @proposal = Proposal.new(proposal_data)
     pdf_content = ::PdfGeneratorService.new(proposal, current_user).generate_pdf
 
-    @file_path = Rails.root.join('public', 'pdfs', "#{proposal.title}.pdf")
+    @file_path = Rails.root.join('tmp', "#{proposal.title}.pdf")
 
     File.open(file_path, 'wb') do |file|
       file << pdf_content

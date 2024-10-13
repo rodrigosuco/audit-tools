@@ -5,7 +5,7 @@ class ProposalMailer < ApplicationMailer
   def proposal_email(proposal:)
     @proposal = proposal
     set_company
-    attachments["#{proposal.title}.pdf"] = File.read("public/pdfs/#{proposal.title}.pdf")
+    attachments["#{proposal.title}.pdf"] = File.read("tmp/#{proposal.title}.pdf")
     mail(to: @company.contact_email, subject: "New Proposal - #{proposal.title}")
   end
 
