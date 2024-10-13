@@ -6,6 +6,7 @@ class Proposal < ApplicationRecord
   private
 
   def calc_total_cost
+    return unless self.items.present?
     self.total_cost = self.items.map(&:total_cost).inject(:+).round(2)
   end
 end
