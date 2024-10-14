@@ -1,5 +1,8 @@
-<div class="flex min-h-screen items-center justify-center bg-gray-50">
+<div class="flex max-h-screen items-center justify-center bg-gray-50">
   <div class="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
+    <% if notice.present? || alert.present? %>
+      <p class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert"><%= notice || alert %></p>
+    <% end %>
     <h2 class="mb-6 text-2xl font-semibold text-gray-800">Hi, welcome!</h2>
     <h3 class="mb-4 text-lg font-medium text-gray-600">Sign in to your Dashboard.</h3>
     <p class="mb-6 text-sm text-gray-500">Fill the required fields to login on AuditTools.</p>
@@ -9,11 +12,11 @@
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'mt-1 w-full rounded-md border-gray-300 px-4 py-2 text-gray-700 shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50' %>
       </div>
       <div>
-        <%= f.label :password, 'Senha', class: 'block text-sm font-medium text-gray-700' %>
+        <%= f.label :password, 'Password', class: 'block text-sm font-medium text-gray-700' %>
         <%= f.password_field :password, autocomplete: "current-password", class: 'mt-1 w-full rounded-md border-gray-300 px-4 py-2 text-gray-700 shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50' %>
       </div>
       <div>
-        <%= f.submit "Entrar", class: 'mt-4 w-full rounded-md bg-green-600 px-4 py-2 text-white font-semibold hover:bg-green-700 focus:outline-none focus:ring focus:ring-green-500 focus:ring-opacity-50' %>
+        <%= f.submit "Sign in", class: 'mt-4 w-full rounded-md bg-green-600 px-4 py-2 text-white font-semibold hover:bg-green-700 focus:outline-none focus:ring focus:ring-green-500 focus:ring-opacity-50' %>
       </div>
     <% end %>
   </div>
