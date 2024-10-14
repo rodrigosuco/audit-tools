@@ -39,7 +39,7 @@
       <div data-proposals-target="dropdownMenu" class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
         <div class="py-1" role="none">
           <%= link_to "Send to company", "#", data: { action: "proposals#showModal" }, class: 'block text-gray-900 bg-white focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-gray-100 font-medium text-sm px-5 py-2.5 mb-2 dark:text-black dark:border-gray-600 dark:hover:bg-gray-100 dark:hover:border-gray-600 dark:focus:ring-gray-100' %>
-          <%= link_to "Download", download_proposal_path(@proposal), class: 'block text-gray-900 bg-white focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-gray-100 font-medium text-sm px-5 py-2.5 mb-2 dark:text-black dark:border-gray-600 dark:hover:bg-gray-100 dark:hover:border-gray-600 dark:focus:ring-gray-100' %>
+          <%= link_to "Download", download_proposal_path(@proposal), data: { action: "proposals#timeOutButton", proposals_target: "downloadButton" }, class: 'block text-gray-900 bg-white focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-gray-100 font-medium text-sm px-5 py-2.5 mb-2 dark:text-black dark:border-gray-600 dark:hover:bg-gray-100 dark:hover:border-gray-600 dark:focus:ring-gray-100' %>
         </div>
       </div>
     </div>

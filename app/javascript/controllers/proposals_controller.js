@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-    static targets = ["modal", "dropdownMenu"]
+    static targets = ["modal", "dropdownMenu", "downloadButton"]
 
     connect() {
         this.handleDocumentClick = this.handleDocumentClick.bind(this);
@@ -44,5 +44,24 @@ export default class extends Controller {
         if (event.key === "Escape") {
             this.hideModal();
         }
+    }
+
+    timeOutButton(event) {
+        const link = event.currentTarget;
+
+        if (link.classList.contains('disabled')) {
+            event.preventDefault();
+            return;
+        }
+        link.innerHTML="Download has started"
+        link.classList.add('disabled');
+        link.style.pointerEvents = 'none';
+        link.style.opacity = '0.5';
+        setTimeout(() => {
+            link.innerHTML="Download"
+            link.classList.remove('disabled');
+            link.style.pointerEvents = '';
+            link.style.opacity = '';
+        }, 60000);
     }
 }
