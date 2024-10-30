@@ -71,7 +71,7 @@
     <h1>PROPOSTA COMERCIAL - <%= @proposal.title.upcase %></h1>
     <p class="highlight"><%= @proposal.company.legal_name.upcase %></p>
     <p><%= @proposal.company.street %>, <%= @proposal.company.number %>, <%= @proposal.company.neighborhood %>,
-      <%= @proposal.company.city %>, <%= @proposal.company.state %>, <%= @proposal.company.zip %>/p>
+      <%= @proposal.company.city %>, <%= @proposal.company.state %>, <%= @proposal.company.zip %></p>
     <p>Norma: <%= @proposal.items.first.standard.name.upcase %></p>
     <p>Prezado(a) <%= @proposal.company.contact_name %>,</p>
     <p>Agradecemos por seu interesse nos serviços. Temos o prazer de apresentar a nossa proposta em resposta à sua solicitação de serviços na norma <%= @proposal.items.first.standard.name.upcase %>.</p>
