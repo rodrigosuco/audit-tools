@@ -30,6 +30,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
+        @proposal.calc_total_cost
         format.html { redirect_to proposal_url(@proposal), notice: "Item was successfully created." }
         format.json { render :show, status: :created, location: @item }
       else
@@ -43,6 +44,7 @@ class ItemsController < ApplicationController
   def update
     respond_to do |format|
       if @item.update(item_params)
+        @proposal.calc_total_cost
         format.html { redirect_to proposal_url(@proposal), notice: "Item was successfully updated." }
         format.json { render :show, status: :ok, location: @item }
       else
