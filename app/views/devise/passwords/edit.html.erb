@@ -1,25 +1,59 @@
-<h2>Change your password</h2>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
-
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+<div class="flex max-h-screen items-center justify-center bg-gray-50">
+  <div class="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
+    <% if notice.present? || alert.present? %>
+      <p class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert">
+        <%= notice || alert %>
+      </p>
     <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <% if resource.errors.any? %>
+      <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
+        <ul class="list-disc pl-5">
+          <% resource.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
+    <h2 class="mb-6 text-2xl font-semibold text-gray-800">Change your password</h2>
+    <h3 class="mb-4 text-lg font-medium text-gray-600">Set a new password.</h3>
+    <p class="mb-6 text-sm text-gray-500">
+      Please enter your new password below.
+    </p>
 
-<%= render "devise/shared/links" %>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: 'space-y-4' }) do |f| %>
+      <%= f.hidden_field :reset_password_token %>
+
+      <div>
+        <%= f.label :password, "New password", class: 'block text-sm font-medium text-gray-700' %>
+        <% if @minimum_password_length %>
+          <p class="text-xs text-gray-500">
+            (<%= @minimum_password_length %> characters minimum)
+          </p>
+        <% end %>
+        <%= f.password_field :password, autofocus: true, autocomplete: "new-password",
+                             class: 'mt-1 w-full rounded-md border-gray-300 px-4 py-2 text-gray-700
+                 shadow-sm focus:border-green-500 focus:ring focus:ring-green-500
+                 focus:ring-opacity-50' %>
+      </div>
+
+      <div>
+        <%= f.label :password_confirmation, "Confirm new password", class: 'block text-sm font-medium text-gray-700' %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password",
+                             class: 'mt-1 w-full rounded-md border-gray-300 px-4 py-2 text-gray-700
+                 shadow-sm focus:border-green-500 focus:ring focus:ring-green-500
+                 focus:ring-opacity-50' %>
+      </div>
+
+      <div>
+        <%= f.submit "Change my password",
+                     class: 'mt-4 w-full rounded-md bg-green-600 px-4 py-2 text-white font-semibold
+                 hover:bg-green-700 focus:outline-none focus:ring focus:ring-green-500
+                 focus:ring-opacity-50' %>
+      </div>
+    <% end %>
+
+    <%= link_to "Log in", new_session_path(resource_name), class: 'text-sm text-gray-500' %>
+  </div>
+</div>
