@@ -44,7 +44,7 @@ class ProposalsController < ApplicationController
 
   # POST /proposals or /proposals.json
   def create
-    @proposal = Proposal.new(proposal_params)
+    @proposal = current_user.proposals.build(proposal_params)
 
     respond_to do |format|
       if @proposal.save

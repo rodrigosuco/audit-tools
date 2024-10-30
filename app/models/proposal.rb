@@ -1,6 +1,7 @@
 class Proposal < ApplicationRecord
   has_many :items, dependent: :destroy
   belongs_to :company
+  belongs_to :user
   before_save :calc_total_cost
 
   enum discount_type: { percentage: 'percentage', fixed: 'fixed' }

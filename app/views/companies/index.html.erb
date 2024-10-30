@@ -22,7 +22,7 @@
         <div class="flex flex-col items-end">
           <p class="text-sm text-gray-500 mb-2"><strong>Sales Name:</strong> <%= company.sales_name %></p>
           <p class="text-sm text-gray-500 mb-2"><strong>Scope:</strong> <%= company.scope %></p>
-          <p class="text-sm text-gray-500"><strong>Contact:</strong> <%= company.contact_name %> (<%= company.contact_phone %>)</p>
+          <p class="text-sm text-gray-500"><strong>Contact:</strong> <%= company.contact_name %> - <%= format_phone company.contact_phone %></p>
         </div>
 
         <div class="ml-6">

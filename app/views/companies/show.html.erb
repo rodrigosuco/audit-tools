@@ -31,12 +31,12 @@
         <p><strong>Employees quantity:</strong> <%= @company.employees_number %></p>
         <p><strong>City:</strong> <%= @company.city %></p>
         <p><strong>State:</strong> <%= @company.state %></p>
-        <p><strong>Zip:</strong> <%= @company.zip %></p>
+        <p><strong>Zip:</strong> <%= format_cep @company.zip %></p>
         <p><strong>Country:</strong> <%= @company.country %></p>
       </div>
     </div>
 
-    <p><strong>Contact phone:</strong> <%= @company.contact_phone %></p>
+    <p><strong>Contact phone:</strong> <%= format_phone @company.contact_phone %></p>
     <p class="mt-4"><strong>Scope:</strong> <%= @company.scope %></p>
   </div>
 </div>
