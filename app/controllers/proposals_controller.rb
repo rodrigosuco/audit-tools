@@ -95,6 +95,6 @@ class ProposalsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def proposal_params
-    params.require(:proposal).permit(:company_id, :title)
+    params.require(:proposal).permit(:company_id, :title, :status)
   end
 end

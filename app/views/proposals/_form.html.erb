@@ -23,6 +23,11 @@
           <%= form.label :title, "Title", class: "block text-gray-700 text-sm font-bold mb-2" %>
           <%= form.text_field :title, class: 'block w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200' %>
         </div>
+
+        <div class="w-full md:w-1/2 px-4 mb-4">
+          <%= form.label :status, "Status", class: "block text-gray-700 text-sm font-bold mb-2" %>
+          <%= form.select :status, [ 'On-hold', 'Approved', 'Rejected', 'Cancelled', 'Client Review' ],{ include_blank: true }, data: { controller: 'slim' }, class: 'block w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200' %>
+        </div>
       </div>
 
       <div class="flex space-x-4">
