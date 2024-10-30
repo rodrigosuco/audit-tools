@@ -62,34 +62,19 @@
 </head>
 <body>
   <div class="header">
-    <%= image_tag 'Logo_Intertek.png' %>
     <p>Preparado por: <strong><%= @current_user['name'] %></strong></p>
     <p><%= @current_user['position'] %></p>
     <p>Data: <%= Date.today.strftime('%d/%m/%Y') %></p>
   </div>
 
   <div class="main-section">
-    <h1>PROPOSTA COMERCIAL - SERVIÇOS DE AUDITORIA DE CERTIFICAÇÃO</h1>
+    <h1>PROPOSTA COMERCIAL - <%= @proposal.title.upcase %></h1>
     <p class="highlight"><%= @proposal.company.legal_name.upcase %></p>
     <p><%= @proposal.company.street %>, <%= @proposal.company.number %>, <%= @proposal.company.neighborhood %>,
       <%= @proposal.company.city %>, <%= @proposal.company.state %>, <%= @proposal.company.zip %>/p>
     <p>Norma: <%= @proposal.items.first.standard.name.upcase %></p>
     <p>Prezado(a) <%= @proposal.company.contact_name %>,</p>
-    <p>Agradecemos por seu interesse nos serviços da Intertek. Temos o prazer de apresentar a nossa proposta em resposta à sua solicitação de serviços na norma <%= @proposal.items.first.standard.name.upcase %>.</p>
-    <p>Por mais de 130 anos, a Intertek tem sido um parceiro confiável para as empresas ao redor do mundo, ajudando a garantir a qualidade e segurança dos produtos.</p>
-    <p>Vamos além dos testes, inspeções e certificações para melhorar o desempenho da produção das empresas, minimizando os riscos, reforçando a imagem da marca, ajudando na expansão do mercado, contribuindo para a sustentabilidade ambiental e responsabilidade social.</p>
-  </div>
-
-  <div class="info-section">
-    <h2>Sobre a Intertek</h2>
-    <p>A Intertek é um organismo líder de Garantia de Qualidade Total para indústrias em todo o mundo. Com nossa rede de mais de 1.000 laboratórios e escritórios em mais de 100 países, oferecemos soluções inovadoras e personalizadas de garantia, teste, inspeção e certificação.</p>
-    <ul>
-      <li><strong>Auditoria:</strong> Verificamos o desempenho de seu negócio em relação a critérios regulatórios.</li>
-      <li><strong>Teste:</strong> Incluímos controle de qualidade e pesquisa e desenvolvimento.</li>
-      <li><strong>Inspeção:</strong> Serviços de inspeção, incluindo amostragem e supervisão de carregamento.</li>
-      <li><strong>Certificação:</strong> Serviços de certificação para fabricantes e varejistas.</li>
-      <li><strong>Treinamento:</strong> Garantimos que sua equipe esteja atualizada em questões de conformidade.</li>
-    </ul>
+    <p>Agradecemos por seu interesse nos serviços. Temos o prazer de apresentar a nossa proposta em resposta à sua solicitação de serviços na norma <%= @proposal.items.first.standard.name.upcase %>.</p>
   </div>
 
   <h2>Atividades e Custos</h2>
@@ -148,14 +133,6 @@
     <p>O pagamento será realizado mediante nota fiscal e boleto enviados após a auditoria.</p>
   </div>
 
-  <div class="billing-info-section">
-    <h2>Dados de Emissão da Nota Fiscal Intertek</h2>
-    <p><strong>Razão Social:</strong> INTERTEK DO BRASIL INSPEÇÕES LTDA.</p>
-    <p><strong>Endereço:</strong> Alameda Mamoré, 503 – 16º andar – Alphaville Industrial / Barueri - SP - CEP.: 06454-040</p>
-    <p><strong>CNPJ:</strong> 42.565.697/0037-07 - I.E. Isento - I.M. 474768.5</p>
-    <p>Nota: O cliente está sujeito à análise de crédito, mediante nossa equipe financeira, aprovação é necessária para que o serviço seja realizado.</p>
-  </div>
-
   <div class="signature-section">
     <h2>Termo de Aceite</h2>
     <p>Para formalizar a aceitação desta proposta, solicitamos que nos retorne esta página digitalizada com a assinatura.</p>
@@ -186,7 +163,7 @@
 
   <div class="footer">
     <p>Confidencial – Estritamente para as partes pretendidas.</p>
-    <p>Atenciosamente,<br><%= @current_user['name'] %><br><%= @current_user['position'] %><br>Intertek do Brasil Inspeções Ltda.<br><%= @current_user['phone'] %><br><%= @current_user['email'] %></p>
+    <p>Atenciosamente,<br><%= @current_user['name'] %><br><%= @current_user['position'] %><br><%= @current_user['phone'] %><br><%= @current_user['email'] %></p>
     <p>Obrigado por considerar nossos serviços. Por favor, não hesite em nos contatar com quaisquer perguntas.</p>
   </div>
 </body>
