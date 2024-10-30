@@ -2,10 +2,11 @@ class ProposalsController < ApplicationController
   load_and_authorize_resource
   before_action :set_proposal, only: %i[show edit update destroy]
   before_action :set_companies, only: %i[new edit create update]
+  before_action :check_items, only: %i[export download]
 
   # GET /proposals or /proposals.json
   def index
-    @proposals = Proposal.all
+    @proposals = Proposal.all.order(created_at: :desc)
   end
 
   # GET /proposals/1 or /proposals/1.json
@@ -80,6 +81,10 @@ class ProposalsController < ApplicationController
   end
 
   private
+
+  def check_items
+    redirect_to proposal_url(@proposal), notice: "Could not export, proposal do not have items!" if @proposal.items.empty?
+  end
 
   def export_response
     ::ExportProposalJob.perform_async(@proposal.as_json, current_user.as_json)
