@@ -5,6 +5,7 @@ class CompaniesController < ApplicationController
   # GET /companies or /companies.json
   def index
     @companies = Company.all
+    @pagy, @companies = pagy(@companies)
   end
 
   # GET /companies/1 or /companies/1.json

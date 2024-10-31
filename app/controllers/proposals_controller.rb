@@ -7,6 +7,7 @@ class ProposalsController < ApplicationController
   # GET /proposals or /proposals.json
   def index
     @proposals = Proposal.all.order(created_at: :desc)
+    @pagy, @proposals = pagy(@proposals)
   end
 
   # GET /proposals/1 or /proposals/1.json

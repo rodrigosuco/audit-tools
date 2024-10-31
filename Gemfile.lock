@@ -109,6 +109,7 @@ GEM
     dotenv (3.1.4)
     drb (2.2.1)
     erubi (1.13.0)
+    ffaker (2.23.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.5)
@@ -167,6 +168,7 @@ GEM
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pagy (9.1.1)
     parallel (1.26.3)
     parser (3.3.5.0)
       ast (~> 2.4.1)
@@ -340,9 +342,11 @@ DEPENDENCIES
   debug
   devise
   dotenv
+  ffaker
   importmap-rails
   jbuilder
   kredis
+  pagy
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.2.1)

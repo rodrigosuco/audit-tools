@@ -5,6 +5,7 @@ class StandardsController < ApplicationController
   # GET /standards or /standards.json
   def index
     @standards = Standard.all
+    @pagy, @standards = pagy(@standards)
   end
 
   # GET /standards/1 or /standards/1.json

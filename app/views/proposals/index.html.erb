@@ -50,4 +50,7 @@
       </div>
     <% end %>
   </div>
+  <div class="flex justify-end mt-6">
+    <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+  </div>
 </div>

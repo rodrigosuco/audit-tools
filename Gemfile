@@ -43,6 +43,8 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  gem "ffaker"
 end
 
 group :development do
@@ -69,3 +71,5 @@ gem "wicked_pdf"
 gem "wkhtmltopdf-binary"
 
 gem "sidekiq", "~> 7.3"
+
+gem "pagy"
