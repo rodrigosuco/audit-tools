@@ -4,7 +4,8 @@ class CompaniesController < ApplicationController
 
   # GET /companies or /companies.json
   def index
-    @companies = Company.all
+    @q = Company.ransack(params[:q])
+    @companies = @q.result(distinct: true)
     @pagy, @companies = pagy(@companies)
   end
 

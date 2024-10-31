@@ -4,7 +4,8 @@ class StandardsController < ApplicationController
 
   # GET /standards or /standards.json
   def index
-    @standards = Standard.all
+    @q = Standard.ransack(params[:q])
+    @standards = @q.result(distinct: true)
     @pagy, @standards = pagy(@standards)
   end
 

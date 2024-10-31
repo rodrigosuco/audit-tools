@@ -8,9 +8,16 @@
     </div>
   </div>
   <div class="flex space-x-2">
-    <div class="">
 
-    </div>
+    <% if current_page?(controller: 'companies', action: 'index') %>
+      <%= render 'shared/companies_search_form' %>
+    <% elsif current_page?(controller: 'proposals', action: 'index') %>
+      <%= render 'shared/proposals_search_form' %>
+    <% elsif current_page?(controller: 'standards', action: 'index') %>
+      <%= render 'shared/standards_search_form' %>
+    <% elsif current_page?(controller: 'users', action: 'index') %>
+      <%= render 'shared/users_search_form' %>
+    <% end %>
     <div class="md:hidden">
       Dropdown
     </div>

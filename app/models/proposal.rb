@@ -9,6 +9,14 @@ class Proposal < ApplicationRecord
   validates :discount, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
   validates :discount_type, inclusion: { in: discount_types.keys }, allow_nil: true
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[title status]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    []
+  end
+
   def last_updated_at
     return ((Time.now - self.updated_at) / 1.day).to_i if self.items.empty?
 

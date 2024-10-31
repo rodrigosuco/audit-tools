@@ -6,7 +6,8 @@ class ProposalsController < ApplicationController
 
   # GET /proposals or /proposals.json
   def index
-    @proposals = Proposal.all.order(created_at: :desc)
+    @q = Proposal.ransack(params[:q])
+    @proposals = @q.result(distinct: true)
     @pagy, @proposals = pagy(@proposals)
   end
 
