@@ -1,25 +1,49 @@
 <nav class="p-4 flex justify-between sticky top-0 h-20 items-center">
   <div class="flex items-center space-x-2">
     <div>
-      <%= image_tag 'companhia.png', :alt => "logo", class: 'w-10 h-10'%>
+      <%= image_tag 'companhia.png', alt: "logo", class: 'w-10 h-10' %>
     </div>
     <div class="font-bold">
       Audit Tools
     </div>
   </div>
-  <div class="flex space-x-2">
-
+  <div class="flex space-x-2 items-center">
+<% unless controller_name == 'sessions' || controller_name == 'passwords' %>
     <% if current_page?(controller: 'companies', action: 'index') %>
-      <%= render 'shared/companies_search_form' %>
-    <% elsif current_page?(controller: 'proposals', action: 'index') %>
-      <%= render 'shared/proposals_search_form' %>
-    <% elsif current_page?(controller: 'standards', action: 'index') %>
-      <%= render 'shared/standards_search_form' %>
-    <% elsif current_page?(controller: 'users', action: 'index') %>
-      <%= render 'shared/users_search_form' %>
-    <% end %>
-    <div class="md:hidden">
-      Dropdown
+        <%= render 'shared/companies_search_form' %>
+      <% elsif current_page?(controller: 'proposals', action: 'index') %>
+        <%= render 'shared/proposals_search_form' %>
+      <% elsif current_page?(controller: 'standards', action: 'index') %>
+        <%= render 'shared/standards_search_form' %>
+      <% elsif current_page?(controller: 'users', action: 'index') %>
+        <%= render 'shared/users_search_form' %>
+      <% end %>
+  <% end %>
+    <div class="md:hidden relative" data-controller="dropdown">
+      <button data-action="click->dropdown#toggle" class="focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+      <div data-dropdown-target="menu" class="hidden absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
+        <%= link_to root_path, class: "block px-4 py-2 text-gray-800 hover:bg-gray-200" do %>
+          Home
+        <% end %>
+        <%= link_to companies_path, class: "block px-4 py-2 text-gray-800 hover:bg-gray-200" do %>
+          Companies
+        <% end %>
+        <%= link_to proposals_path, class: "block px-4 py-2 text-gray-800 hover:bg-gray-200" do %>
+          Proposals
+        <% end %>
+        <%= link_to standards_path, class: "block px-4 py-2 text-gray-800 hover:bg-gray-200" do %>
+          Standards
+        <% end %>
+        <%= link_to users_path, class: "block px-4 py-2 text-gray-800 hover:bg-gray-200" do %>
+          Users
+        <% end %>
+        <%= button_to "Sign out", destroy_user_session_path, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class: 'block text-red-500 hover:bg-red-100 w-full text-left px-4 py-2' %>
+      </div>
     </div>
   </div>
 </nav>
