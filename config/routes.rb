@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :users
   end
   resources :standards
+  get "proposals/:proposal_id/items/:item_id/schedule", to: "proposals#schedule", as: "schedule_proposal_item"
   resources :proposals do
     resources :items
     member do

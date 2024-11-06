@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_30_214154) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_06_010948) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_30_214154) do
     t.datetime "updated_at", null: false
     t.float "total_days"
     t.bigint "proposal_id", null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.index ["proposal_id"], name: "index_items_on_proposal_id"
     t.index ["standard_id"], name: "index_items_on_standard_id"
   end

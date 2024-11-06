@@ -11,6 +11,12 @@ class ProposalsController < ApplicationController
     @pagy, @proposals = pagy(@proposals)
   end
 
+  def schedule
+    @proposal = Proposal.find(params[:proposal_id])
+    @item = @proposal.items.find(params[:item_id])
+
+  end
+
   # GET /proposals/1 or /proposals/1.json
   def show
   end

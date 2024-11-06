@@ -75,3 +75,5 @@ gem "sidekiq", "~> 7.3"
 gem "pagy"
 
 gem "ransack"
+
+gem "simple_calendar"
