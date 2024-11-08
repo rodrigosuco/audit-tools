@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
   resources :standards
   get "proposals/:proposal_id/items/:item_id/schedule", to: "proposals#schedule", as: "schedule_proposal_item"
+  post "proposals/:proposal_id/items/:id/confirm_schedule", to: "items#confirm_schedule", as: "confirm_schedule_proposal_item"
   resources :proposals do
     resources :items
     member do

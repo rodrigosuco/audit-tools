@@ -1,16 +1,15 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-    static targets = ["modal"]
-
-    connect() {
-        this.handleDocumentClick = this.handleDocumentClick.bind(this);
-    }
+    static targets = ["modal", "dateDisplay", "scheduledDateInput"]
 
     showModal(event) {
         event.preventDefault();
+        const date = event.currentTarget.dataset.date;
         this.modalTarget.classList.remove("hidden");
         document.addEventListener("keydown", this.closeOnEscape);
+        this.dateDisplayTarget.textContent = date;
+        this.scheduledDateInputTarget.value = date;
     }
 
     hideModal(event) {

@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   validates :stage, presence: true
   validates :year, presence: true, numericality: { only_integer: true }
   validates :stage, presence: true
-  validates :onsite_man_days, presence: true, numericality: { only_float: true }
+  validates :onsite_man_days, presence: true, numericality: { only_float: true, greater_than_or_equal_to: 0.0 }
   validates :off_site_man_days, presence: true, numericality: { only_float: true }
   validates :man_day_rate, presence: true, numericality: { only_float: true }
 

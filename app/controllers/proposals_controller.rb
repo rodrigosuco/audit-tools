@@ -14,7 +14,6 @@ class ProposalsController < ApplicationController
   def schedule
     @proposal = Proposal.find(params[:proposal_id])
     @item = @proposal.items.find(params[:item_id])
-
   end
 
   # GET /proposals/1 or /proposals/1.json
