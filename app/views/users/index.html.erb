@@ -7,7 +7,7 @@
 
   <div class="flex justify-between mb-6">
     <h1 class="text-2xl font-bold">Users</h1>
-    <%= button_to "New user", new_user_path, method: :get, class: 'text-gray-900 bg-green-500 focus:outline-none hover:bg-green-100 focus:ring-1 focus:ring-green-100 font-medium rounded-lg text-sm px-5 py-2.5 mb-2' %>
+    <%= button_to "New user", new_user_path, method: :get, class: 'success-button' %>
   </div>
 
   <div class="space-y-4" id="users">
@@ -21,11 +21,10 @@
             <strong>Email:</strong>
             <%= user.email %>
           </p>
-          <!-- Add any other user details you'd like to display -->
         </div>
 
         <div class="ml-6">
-          <%= button_to "Show this user", user, method: :get, class: 'text-gray-900 bg-white focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 mb-2' %>
+          <%= button_to "Show this user", user, method: :get, class: 'default-button' %>
         </div>
       </div>
     <% end %>

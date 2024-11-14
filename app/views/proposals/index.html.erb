@@ -7,7 +7,7 @@
 
   <div class="flex justify-between mb-6">
     <h1 class="text-2xl font-bold">Proposals</h1>
-    <%= button_to "New proposal", new_proposal_path, method: :get, class: 'text-gray-900 bg-green-500 focus:outline-none hover:bg-green-100 focus:ring-1 focus:ring-green-100 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:text-black dark:border-green-600 dark:hover:bg-green-400 dark:hover:border-green-600 dark:focus:ring-green-100' %>
+    <%= button_to "New proposal", new_proposal_path, method: :get, class: 'success-button' %>
   </div>
 
   <div class="space-y-4" id="proposals">
@@ -45,7 +45,7 @@
           </div>
         </div>
         <div class="ml-6">
-          <%= button_to "Show this proposal", proposal, method: :get, class: 'text-gray-900 bg-white focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:text-black dark:border-gray-600 dark:hover:bg-gray-100 dark:hover:border-gray-600 dark:focus:ring-gray-100' %>
+          <%= button_to "Show this proposal", proposal, method: :get, class: 'default-button' %>
         </div>
       </div>
     <% end %>
