@@ -13,6 +13,10 @@ class Item < ApplicationRecord
   validates :off_site_man_days, presence: true, numericality: { only_float: true }
   validates :man_day_rate, presence: true, numericality: { only_float: true }
 
+  def scheduled? = start_time.present?
+
+  def not_scheduled? = start_time.nil?
+
   private
   def calc_total_days
     self.total_days = self.onsite_man_days + self.off_site_man_days

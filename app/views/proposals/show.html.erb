@@ -132,9 +132,27 @@
             <%= item.total_cost %>
           </p>
         </div>
-        <% if @proposal.status == 'Approved' %>
+        <hr>
+        <br>
+        <p class="text-sm text-gray-700">
+          <strong class="font-medium">Scheduling status:</strong>
+          <% if item.scheduled? %>
+           <%= content_tag(:span, "Scheduled", class: 'self-start bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300') %>
+          <% else %>
+            <%= content_tag(:span, "Pending schedule", class: 'self-start bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300') %>
+          <% end %>
+        </p>
+        <p class="text-sm text-gray-700">
+          <%= "from: " + item.start_time.strftime('%d/%m/%Y') if item.start_time.present? %>
+          <%= "to: " + item.end_time.strftime('%d/%m/%Y') if item.end_time.present? %>
+        </p>
+        <% if @proposal.status == 'Approved' && item.not_scheduled? %>
           <div class="flex justify-end space-x-4">
             <%= link_to "Schedule", schedule_proposal_item_path(@proposal, item), data: { turbo: false }, class: 'default-button' %>
+          </div>
+        <% elsif @proposal.status == 'Approved' && item.scheduled? %>
+          <div class="flex justify-end space-x-4">
+            <%= link_to "Edit Schedule", schedule_proposal_item_path(@proposal, item), data: { turbo: false }, class: 'default-button' %>
           </div>
         <% else %>
           <div class="flex justify-end space-x-4">
