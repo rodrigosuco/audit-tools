@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_06_010948) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_14_022843) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,8 +50,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_06_010948) do
     t.bigint "proposal_id", null: false
     t.datetime "start_time"
     t.datetime "end_time"
+    t.bigint "user_id"
     t.index ["proposal_id"], name: "index_items_on_proposal_id"
     t.index ["standard_id"], name: "index_items_on_standard_id"
+    t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "proposals", force: :cascade do |t|
@@ -101,6 +103,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_06_010948) do
 
   add_foreign_key "items", "proposals"
   add_foreign_key "items", "standards"
+  add_foreign_key "items", "users"
   add_foreign_key "proposals", "companies"
   add_foreign_key "proposals", "users"
   add_foreign_key "users", "roles"

@@ -1,16 +1,16 @@
-<div data-controller="schedule">
+<div data-controller="schedule" data-schedule-proposal-id-value="<%= @proposal.id.to_s %>">
   <%= month_calendar(events: @proposal.items) do |date, items| %>
     <% if date.saturday? || date.sunday? %>
       <div class="calendar-day weekend">
-        <span class="text-sm text-gray-500"><%= format_date date %></span>
+        <span class="text-sm text-gray-500"><%= format_date(date) %></span>
         <p class="text-sm text-gray-500">Weekend</p>
       </div>
     <% else %>
       <div class="calendar-day weekday">
         <div>
-          <span class="text-sm text-gray-500"><%= format_date date %></span>
+          <span class="text-sm text-gray-500"><%= format_date(date) %></span>
         </div>
-        <%= link_to 'Schedule', '#', data: { action: "schedule#showModal", date: format_date(date) }, class: 'bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400' %>
+        <%= link_to 'Schedule', '#', data: { action: "schedule#showModal", date: date.iso8601 }, class: 'bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400' %>
         <% items.each do |audit_item| %>
           <div>
             <u class="text-sm text-gray-800"><%= audit_item.stage %></u>
@@ -25,31 +25,34 @@
 
     <div class="flex items-center justify-center min-h-screen p-4">
       <div class="bg-white rounded-lg shadow-lg transform transition-all sm:max-w-lg sm:w-full">
-        <div class="px-6 py-5">
-          <h3 class="text-xl leading-6 font-semibold text-gray-900">Scheduling:</h3>
-          <p><%= @item.stage %></p>
-          <div class="mt-4">
-            <p class="text-sm text-gray-500">
-              Scheduling date: <span data-schedule-target="dateDisplay"></span>
-            </p>
-            <p class="text-sm text-gray-500">
-              Confirm and send scheduling confirmation to auditor and company?
-            </p>
-            <p class="text-sm text-gray-500">
-              Company contact: <%= @proposal.company.contact_name %>
-            </p>
-          </div>
-        </div>
+        <%= form_with model: [@proposal, @item], url: confirm_schedule_proposal_item_path(@proposal, @item), method: :post, local: true do |form| %>
+          <div class="px-6 py-5">
+            <h3 class="text-xl leading-6 font-semibold text-gray-900">Scheduling:</h3>
+            <p><%= @item.stage %></p>
+            <p>Available auditors:</p>
+            <%= form.collection_select :user_id, [], :id, :name, { include_blank: true }, data: { controller: 'slim', 'schedule-target': 'auditorSelect' }, class: 'block w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200' %>
 
-        <div class="px-6 py-4 sm:flex sm:flex-row-reverse">
-          <%= form_with model: [@proposal, @item], url: confirm_schedule_proposal_item_path(@proposal, @item), method: :post do |form| %>
+            <div class="mt-4">
+              <p class="text-sm text-gray-500">
+                Scheduling date: <span data-schedule-target="dateDisplay"></span>
+              </p>
+              <p class="text-sm text-gray-500">
+                Confirm and send scheduling confirmation to auditor and company?
+              </p>
+              <p class="text-sm text-gray-500">
+                Company contact: <%= @proposal.company.contact_name %>
+              </p>
+            </div>
+          </div>
+
+          <div class="px-6 py-4 sm:flex sm:flex-row-reverse">
             <%= form.hidden_field :start_time, data: { schedule_target: "scheduledDateInput" } %>
             <%= form.submit "Confirm", class: "w-full sm:w-auto inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:text-sm" %>
-          <% end %>
-          <button data-action="schedule#hideModal" type="button" class="mt-3 sm:mt-0 w-full sm:w-auto inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 sm:text-sm">
-            Cancel
-          </button>
-        </div>
+            <button data-action="schedule#hideModal" type="button" class="mt-3 sm:mt-0 w-full sm:w-auto inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 sm:text-sm">
+              Cancel
+            </button>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get "proposals/:proposal_id/items/:item_id/schedule", to: "proposals#schedule", as: "schedule_proposal_item"
   post "proposals/:proposal_id/items/:id/confirm_schedule", to: "items#confirm_schedule", as: "confirm_schedule_proposal_item"
   resources :proposals do
+    get "auditors", on: :member
     resources :items
     member do
       get :export

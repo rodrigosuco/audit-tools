@@ -16,6 +16,12 @@ class ProposalsController < ApplicationController
     @item = @proposal.items.find(params[:item_id])
   end
 
+  def auditors
+    date = params[:date]
+    auditors = get_available_auditors(date)
+    render json: auditors
+  end
+
   # GET /proposals/1 or /proposals/1.json
   def show
   end
@@ -88,6 +94,13 @@ class ProposalsController < ApplicationController
   end
 
   private
+
+  def get_available_auditors(date)
+    auditors = User.joins(:role).where(roles: { name: 'auditor' })
+    auditors.select do |auditor|
+      !auditor.items.exists?(start_time: date)
+    end.map { |auditor| { id: auditor.id, name: auditor.name } }
+  end
 
   def check_items
     redirect_to proposal_url(@proposal), notice: "Could not export, proposal do not have items!" if @proposal.items.empty?

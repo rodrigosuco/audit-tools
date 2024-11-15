@@ -4,7 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :rememberable, :validatable, :recoverable
   belongs_to :role
   has_many :proposals
+  has_many :items
   validates :role, presence: true
+
+  def auditor? = role.present? && role.name == 'auditor'
 
   def self.ransackable_attributes(auth_object = nil)
     %w[name]
