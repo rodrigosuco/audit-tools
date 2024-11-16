@@ -70,9 +70,9 @@ class ItemsController < ApplicationController
         @item.end_time = calculate_end_time(@item.start_time, @item.onsite_man_days)
         @item.save
       end
-      redirect_to proposal_url(@proposal), notice: "Item was successfully scheduled."
+      redirect_to schedule_proposal_item_path(@proposal, @item), notice: "Item was successfully scheduled."
     else
-      redirect_to proposal_url(@proposal), alert: "Item was not successfully scheduled."
+      redirect_to schedule_proposal_item_path(@proposal, @item), alert: "Item was not successfully scheduled."
     end
   end
 

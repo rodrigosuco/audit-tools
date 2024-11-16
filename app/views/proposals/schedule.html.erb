@@ -1,4 +1,7 @@
 <div data-controller="schedule" data-schedule-proposal-id-value="<%= @proposal.id.to_s %>">
+  <% if notice.present? %>
+    <p class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert"><%= notice %></p>
+  <% end %>
   <%= month_calendar(events: @proposal.items) do |date, items| %>
     <% if date.saturday? || date.sunday? %>
       <div class="calendar-day weekend">
