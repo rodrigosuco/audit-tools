@@ -96,7 +96,7 @@ class ProposalsController < ApplicationController
   private
 
   def get_available_auditors(date)
-    auditors = User.joins(:role).where(roles: { name: 'auditor' })
+    auditors = User.where(role: 'auditor')
     auditors.select do |auditor|
       !auditor.items.exists?(start_time: date)
     end.map { |auditor| { id: auditor.id, name: auditor.name } }
