@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
   before_action :set_user, only: %i[ show edit update destroy ]
-  before_action :set_roles, only: %i[ new create edit update ]
 
   # GET /users or /users.json
   def index
@@ -68,12 +67,9 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
-    def set_roles
-      @roles = Role.by_name
-    end
-
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :role_id, :email, :password, :password_confirmation, :position, :phone)
+      params.require(:user).permit(:name, :role, :email, :password, :password_confirmation,
+                                   :position, :phone, standard_ids: [])
     end
 end

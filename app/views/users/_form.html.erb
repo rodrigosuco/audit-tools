@@ -19,8 +19,8 @@
     </div>
 
     <div>
-      <%= form.label :role_id, class: "block font-semibold mb-1" %>
-      <%= form.collection_select :role_id, Role.all, :id, :name, { prompt: "Select a role" }, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" %>
+      <%= form.label :role, class: "block font-semibold mb-1" %>
+      <%= form.select :role, User.roles.invert,{ include_blank: true }, data: { controller: 'slim' }, class: 'block w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200' %>
     </div>
 
     <div>
@@ -39,17 +39,24 @@
     </div>
 
     <div>
-      <%= form.label :password, class: "block font-semibold mb-1" %>
-      <% if @minimum_password_length %>
-        <em class="text-sm text-gray-500">(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %>
-      <%= form.password_field :password, autocomplete: "new-password", class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" %>
+      <%= form.label :standard_ids, class: "block font-semibold mb-1" %>
+      <%= form.collection_select :standard_ids, Standard.all, :id, :name, { include_hidden: false, multiple: true }, data: { controller: 'slim' }, class: '...' %>
     </div>
 
-    <div>
-      <%= form.label :password_confirmation, class: "block font-semibold mb-1" %>
-      <%= form.password_field :password_confirmation, autocomplete: "new-password", class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" %>
-    </div>
+    <% if params[:action] == 'new' %>
+      <div>
+        <%= form.label :password, class: "block font-semibold mb-1" %>
+        <% if @minimum_password_length %>
+          <em class="text-sm text-gray-500">(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %>
+        <%= form.password_field :password, autocomplete: "new-password", class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" %>
+      </div>
+
+      <div>
+        <%= form.label :password_confirmation, class: "block font-semibold mb-1" %>
+        <%= form.password_field :password_confirmation, autocomplete: "new-password", class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" %>
+      </div>
+    <% end %>
 
     <div class="mt-6">
       <%= link_to "Back to users", users_path, class: 'default-button' %>

@@ -4,17 +4,17 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    return unless user.present? # Usuário deve estar logado
+    return unless user.present?
 
-    if user.role.name == "super_admin"
+    if user.role == "super_admin"
       can :manage, :all
-    elsif user.role.name == "admin"
+    elsif user.role == "admin"
       can :manage, User
       can :manage, Proposal
       can :manage, Company
       can :manage, Standard
       can :manage, Item
-    elsif user.role.name == "common"
+    elsif user.role == "common"
       can :manage, Proposal
       can :manage, Company
       can :read, Standard

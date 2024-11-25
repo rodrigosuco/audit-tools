@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :roles
+
   scope "/admin" do
     resources :users
   end
