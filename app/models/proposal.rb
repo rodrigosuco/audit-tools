@@ -5,6 +5,7 @@ class Proposal < ApplicationRecord
   before_save :calc_total_cost
 
   enum discount_type: { percentage: 'percentage', fixed: 'fixed' }
+  enum status: { approved: 'Approved', rejected: 'Rejected', onhold: 'On-hold', cancelled: 'Cancelled', client_review: 'Client Review' }
 
   validates :discount, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
   validates :discount_type, inclusion: { in: discount_types.keys }, allow_nil: true
@@ -43,5 +44,9 @@ class Proposal < ApplicationRecord
     else
       self.total_cost = total
     end
+  end
+
+  def display_status
+    status_before_type_cast
   end
 end
