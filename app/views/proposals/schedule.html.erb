@@ -16,7 +16,7 @@
         <%= link_to 'Schedule', '#', data: { action: "schedule#showModal", date: date.iso8601 }, class: 'bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400' %>
         <% items.each do |audit_item| %>
           <div>
-            <u class="text-sm text-gray-800"><%= audit_item.stage %></u>
+            <u class="text-sm text-gray-800"><%= "#{audit_item.stage} - #{User.find(audit_item.user_id).name if audit_item.user_id }" %></u>
           </div>
         <% end %>
       </div>
@@ -55,7 +55,9 @@
             <%= form.hidden_field :start_time, data: { schedule_target: "scheduledDateInput" } %>
             <%= form.submit "Confirm", class: "success-button ml-2" %>
         <% end %>
-            <%= button_to "Cancel Schedule", cancel_schedule_proposal_item_path(@proposal, @item), method: :post, form_class: "inline", class: "danger-button" %>
+            <% if @item.scheduled? %>
+              <%= button_to "Cancel current schedule", cancel_schedule_proposal_item_path(@proposal, @item), method: :post, form_class: "inline", class: "danger-button" %>
+            <% end %>
           </div>
       </div>
     </div>
