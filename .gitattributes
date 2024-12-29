@@ -10,5 +10,6 @@ config/credentials.yml.enc diff=rails_credentials
 
 *.html linguist-documentation
 *.slim linguist-documentation
+*.erb linguist-documentation
 *.css linguist-documentation
 *.scss linguist-documentation
