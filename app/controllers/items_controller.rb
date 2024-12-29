@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
   before_action :set_proposal
   before_action :set_item, only: %i[show edit update destroy confirm_schedule cancel_schedule]
   before_action :set_standards, only: %i[new create edit update]
-  # GET /items or /items.json
+
   def index
     @items = Item.all
   end
@@ -20,11 +20,9 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
 
-  # GET /items/1/edit
   def edit
   end
 
-  # POST /items or /items.json
   def create
     @item = @proposal.items.build(item_params)
 
@@ -40,7 +38,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /items/1 or /items/1.json
   def update
     respond_to do |format|
       if @item.update(item_params)
@@ -54,7 +51,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  # DELETE /items/1 or /items/1.json
   def destroy
     @item.destroy
 
@@ -70,6 +66,7 @@ class ItemsController < ApplicationController
         @item.end_time = calculate_end_time(@item.start_time, @item.onsite_man_days)
         @item.save
       end
+      ScheduleMailer.confirm_mail(item: @item).deliver_now
       redirect_to schedule_proposal_item_path(@proposal, @item), notice: "Item was successfully scheduled."
     else
       redirect_to schedule_proposal_item_path(@proposal, @item), alert: "Item was not successfully scheduled."
@@ -77,7 +74,9 @@ class ItemsController < ApplicationController
   end
 
   def cancel_schedule
+    last_auditor_id = @item.user_id
     if @item.update(start_time: nil, end_time: nil, user_id: nil)
+      ScheduleMailer.cancel_mail(item: @item, last_auditor_id: last_auditor_id).deliver_now
       redirect_to schedule_proposal_item_path(@proposal, @item), notice: "Item was successfully cancelled."
     else
       redirect_to schedule_proposal_item_path(@proposal, @item), alert: "Item was not successfully cancelled."

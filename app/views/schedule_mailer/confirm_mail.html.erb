@@ -1,0 +1,25 @@
+<h1>Hi <%= @user.name %>!</h1>
+<p>
+  We hope this emails finds you well.
+  We are pleased to inform that your audit on <%= @company.sales_name %> has been scheduled.
+  Please, find below the details:
+</p>
+<p>
+  <h2> <%= @proposal.title %> </h2>
+  <h3> <%= @item.stage %> </h3>
+  <h3> <%= @item.standard.name %> </h3>
+</p>
+<p>
+  <%= "from: " + @item.start_time.strftime('%d/%m/%Y') if @item.start_time.present? %>
+  <%= "to: " + @item.end_time.strftime('%d/%m/%Y') if @item.end_time.present? %>
+</p>
+<p>
+  Onsite days: <%= @item.onsite_man_days %>
+</p>
+<p>
+  Offsite days: <%= @item.off_site_man_days %>
+</p>
+<p>
+  Total days: <%= @item.total_days %>
+</p>
+<p>Thanks for the attention and have a great day!</p>
