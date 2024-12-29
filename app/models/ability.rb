@@ -19,6 +19,8 @@ class Ability
       can :manage, Company
       can :read, Standard
       can :manage, Item
+    elsif user.role == "auditor"
+      can :read, Company
     else
       can :read, :all
     end

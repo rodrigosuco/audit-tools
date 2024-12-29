@@ -20,7 +20,7 @@
 
     <div>
       <%= form.label :role, class: "block font-semibold mb-1" %>
-      <%= form.select :role, User.roles.invert,{ include_blank: true }, data: { controller: 'slim' }, class: 'block w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200' %>
+      <%= form.select :role, User.roles.invert.reject { |role|  role == "Super Admin" }, { include_blank: true }, data: { controller: 'slim' }, class: 'block w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200' %>
     </div>
 
     <div>

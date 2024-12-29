@@ -48,6 +48,21 @@
               <p class="text-sm text-gray-500">
                 Company contact: <%= @proposal.company.contact_name %>
               </p>
+              <br>
+              <% if @item.scheduled? %>
+                <hr>
+                <br>
+                <p class="text-sm text-gray-500">
+                  This audit is currently scheduled to: <%= User.find(@item.user_id).name %>
+                </p>
+                <p class="text-sm text-gray-500">
+                  To be executed from: <%= @item.start_time.strftime("%d/%m/%Y") %> to: <%= @item.end_time.strftime("%d/%m/%Y") %>.
+                </p>
+                <br>
+                <p class="text-sm text-gray-500">
+                  Click on cancel button to cancel the scheduling and notify the auditor.
+                </p>
+              <% end %>
             </div>
           </div>
 

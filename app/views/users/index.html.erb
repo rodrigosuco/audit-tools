@@ -12,6 +12,7 @@
 
   <div class="space-y-4" id="users">
     <% @users.each do |user| %>
+      <% next if user.role == 'super_admin' %>
       <div class="bg-white shadow-md rounded-lg p-6 flex justify-between items-center">
         <div class="flex flex-col">
           <p class="text-lg font-semibold mb-2">
