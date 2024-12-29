@@ -4,7 +4,7 @@
 class ItemsController < ApplicationController
   load_and_authorize_resource
   before_action :set_proposal
-  before_action :set_item, only: %i[show edit update destroy confirm_schedule]
+  before_action :set_item, only: %i[show edit update destroy confirm_schedule cancel_schedule]
   before_action :set_standards, only: %i[new create edit update]
   # GET /items or /items.json
   def index
@@ -73,6 +73,14 @@ class ItemsController < ApplicationController
       redirect_to schedule_proposal_item_path(@proposal, @item), notice: "Item was successfully scheduled."
     else
       redirect_to schedule_proposal_item_path(@proposal, @item), alert: "Item was not successfully scheduled."
+    end
+  end
+
+  def cancel_schedule
+    if @item.update(start_time: nil, end_time: nil, user_id: nil)
+      redirect_to schedule_proposal_item_path(@proposal, @item), notice: "Item was successfully cancelled."
+    else
+      redirect_to schedule_proposal_item_path(@proposal, @item), alert: "Item was not successfully cancelled."
     end
   end
 
