@@ -70,8 +70,6 @@ gem "wicked_pdf"
 
 gem "wkhtmltopdf-binary"
 
-gem "sidekiq", "~> 7.3"
-
 gem "pagy"
 
 gem "ransack"

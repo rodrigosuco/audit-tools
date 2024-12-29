@@ -1,6 +1,4 @@
-class ExportProposalJob
-  include Sidekiq::Job
-  sidekiq_options retry: false
+class ExportProposalJob < ApplicationJob
   attr_reader :proposal, :file_path
 
   def perform(proposal_data, current_user)

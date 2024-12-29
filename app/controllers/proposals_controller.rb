@@ -107,7 +107,7 @@ class ProposalsController < ApplicationController
   end
 
   def export_response
-    ::ExportProposalJob.perform_async(@proposal.as_json, current_user.as_json)
+    ::ExportProposalJob.perform_later(@proposal.as_json, current_user.as_json)
   end
 
   def set_proposal
