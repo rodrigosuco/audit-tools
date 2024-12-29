@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_and_belongs_to_many :standards
   validates :role, presence: true
 
-  enum role: { super_admin: 'Super Admin', admin: 'Admin', auditor: 'Auditor', common: 'Common' }
+  enum :role, { super_admin: 'Super Admin', admin: 'Admin', auditor: 'Auditor', common: 'Common' }
 
   def auditor? = role.present? && role == 'auditor'
 
