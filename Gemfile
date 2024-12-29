@@ -76,3 +76,6 @@ gem "pagy"
 gem "ransack"
 
 gem "simple_calendar"
+gem "phlex-rails", "~> 2.0.rc1", :github => "phlex-ruby/phlex-rails", :branch => "main"
+
+gem "tailwind_merge", "~> 0.14.0"
