@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :proposal
   belongs_to :standard
+  belongs_to :user
   before_save :calc_total_days
   before_save :calc_total_price
   after_save :update_proposal_total_cost

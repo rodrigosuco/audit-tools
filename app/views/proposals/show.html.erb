@@ -147,7 +147,7 @@
           <%= "to: " + item.end_time.strftime('%d/%m/%Y') if item.end_time.present? %>
         </p>
         <p class="text-sm text-gray-700">
-          Auditor: <%= User.find(item.user_id).name if item.user_id.present? %>
+          Auditor: <%= item.user.name if item.user.present? %>
         </p>
         <% if @proposal.status == 'approved' && item.not_scheduled? %>
           <div class="flex justify-end space-x-4">

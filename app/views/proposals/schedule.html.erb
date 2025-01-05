@@ -16,7 +16,7 @@
         <%= link_to 'Schedule', '#', data: { action: "schedule#showModal", date: date.iso8601 }, class: 'bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400' %>
         <% items.each do |audit_item| %>
           <div>
-            <u class="text-sm text-gray-800"><%= "#{audit_item.stage} - #{User.find(audit_item.user_id).name if audit_item.user_id }" %></u>
+            <u class="text-sm text-gray-800"><%= "#{audit_item.stage} - #{audit_item.user.name if audit_item.user }" %></u>
           </div>
         <% end %>
       </div>
@@ -53,7 +53,7 @@
                 <hr>
                 <br>
                 <p class="text-sm text-gray-500">
-                  This audit is currently scheduled to: <%= User.find(@item.user_id).name %>
+                  This audit is currently scheduled to: <%= @item.user.name %>
                 </p>
                 <p class="text-sm text-gray-500">
                   To be executed from: <%= @item.start_time.strftime("%d/%m/%Y") %> to: <%= @item.end_time.strftime("%d/%m/%Y") %>.
