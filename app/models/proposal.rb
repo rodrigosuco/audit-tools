@@ -10,6 +10,7 @@ class Proposal < ApplicationRecord
   validates :discount, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
   validates :discount_type, inclusion: { in: discount_types.keys }, allow_nil: true
 
+  attribute :status, :string, default: 'On-hold'
   def self.ransackable_attributes(auth_object = nil)
     %w[title status]
   end
