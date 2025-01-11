@@ -3,7 +3,13 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
 
   def index
-    @q = User.ransack(params[:q])
+    @q = User.where.not(role: 'auditor').ransack(params[:q])
+    @users = @q.result(distinct: true)
+    @pagy, @users = pagy(@users)
+  end
+
+  def auditors
+    @q = User.where(role: 'auditor').ransack(params[:q])
     @users = @q.result(distinct: true)
     @pagy, @users = pagy(@users)
   end

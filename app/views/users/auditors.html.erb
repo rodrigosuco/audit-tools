@@ -1,0 +1,36 @@
+<div class="container mx-auto px-4 py-8">
+  <% if notice.present? %>
+    <p class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert"><%= notice %></p>
+  <% end %>
+
+  <% content_for :title, "Users" %>
+
+  <div class="flex justify-between mb-6">
+    <h1 class="text-2xl font-bold">Auditors</h1>
+    <%= button_to "New auditor", new_user_path, method: :get, class: 'success-button' %>
+  </div>
+
+  <div class="space-y-4" id="users">
+    <% @users.each do |user| %>
+      <% next if user.role == 'super_admin' %>
+      <div class="bg-white shadow-md rounded-lg p-6 flex justify-between items-center">
+        <div class="flex flex-col">
+          <p class="text-lg font-semibold mb-2">
+            <%= user.name %>
+          </p>
+          <p class="text-sm text-gray-500 mb-1">
+            <strong>Email:</strong>
+            <%= user.email %>
+          </p>
+        </div>
+
+        <div class="ml-6">
+          <%= button_to "Show this auditor", user, method: :get, class: 'default-button' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="flex justify-end mt-6">
+    <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+  </div>
+</div>
