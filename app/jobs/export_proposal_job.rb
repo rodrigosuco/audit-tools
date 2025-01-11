@@ -3,7 +3,7 @@ class ExportProposalJob < ApplicationJob
 
   def perform(proposal_data, current_user)
     @proposal = Proposal.new(proposal_data)
-    pdf_content = ::PdfGeneratorService.new(proposal, current_user).generate_pdf
+    pdf_content = Pdfs::PdfGeneratorService.call(proposal, current_user)
 
     @file_path = Rails.root.join('tmp', "#{proposal.title}.pdf")
 

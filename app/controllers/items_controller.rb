@@ -11,11 +11,9 @@ class ItemsController < ApplicationController
     @items = Item.all
   end
 
-  # GET /items/1 or /items/1.json
   def show
   end
 
-  # GET /items/new
   def new
     @item = Item.new
   end
@@ -106,7 +104,6 @@ class ItemsController < ApplicationController
       @standards = Standard.by_name
     end
 
-    # Only allow a list of trusted parameters through.
     def item_params
       params.require(:item).permit(:standard_id, :stage, :year, :onsite_man_days, :off_site_man_days, :man_day_rate,
                                    :total_cost, :proposal_id, :start_time, :end_time, :user_id)

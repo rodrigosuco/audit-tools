@@ -34,7 +34,7 @@ class ProposalsController < ApplicationController
 
   def download
     pdf_thread = Thread.new do
-      PdfGeneratorService.new(@proposal, current_user).generate_download_pdf
+      ::Pdfs::PdfDownloaderService.call(@proposal, current_user)
     end
 
     pdf = pdf_thread.value
